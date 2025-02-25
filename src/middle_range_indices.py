@@ -32,9 +32,14 @@ def find_middle_range_indices(sorted_list, range_size=1):
         else:
             return [mid_index - 1, mid_index]
 
-    # Calculate the start and end indices for the range
-    start_index = mid_index - range_size
-    end_index = mid_index + range_size
+    # For custom range size
+    # Adjust start and end to be centered around the middle
+    start_offset = range_size
+    end_offset = range_size
+    
+    # Calculate start and end indices
+    start_index = mid_index - start_offset
+    end_index = mid_index + end_offset
 
     # Ensure indices are within list bounds
     start_index = max(0, start_index)
