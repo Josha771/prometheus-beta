@@ -43,6 +43,10 @@ def are_anagrams(str1: str, str2: str) -> bool:
     if len(str1_normalized) != len(str2_normalized):
         return False
     
+    # Quick check to avoid trivial matches
+    if str1_normalized == str2_normalized:
+        return False
+    
     # Create character frequency dictionaries
     char_count1 = {}
     char_count2 = {}
