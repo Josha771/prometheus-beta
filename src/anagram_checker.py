@@ -35,6 +35,10 @@ def are_anagrams(str1: str, str2: str) -> bool:
     str1_normalized = normalize(str1)
     str2_normalized = normalize(str2)
     
+    # Empty strings are anagrams of each other
+    if not str1_normalized and not str2_normalized:
+        return True
+    
     # Quick length check
     if len(str1_normalized) != len(str2_normalized):
         return False
@@ -51,4 +55,4 @@ def are_anagrams(str1: str, str2: str) -> bool:
         char_count2[char] = char_count2.get(char, 0) + 1
     
     # Compare character frequencies
-    return char_count1 == char_count2 and str1_normalized != str2_normalized
+    return char_count1 == char_count2
