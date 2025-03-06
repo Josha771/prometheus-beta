@@ -51,4 +51,4 @@ def are_anagrams(str1: str, str2: str) -> bool:
         char_count2[char] = char_count2.get(char, 0) + 1
     
     # Compare character frequencies
-    return char_count1 == char_count2
+    return char_count1 == char_count2 and str1_normalized != str2_normalized
