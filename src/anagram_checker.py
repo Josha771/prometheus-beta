@@ -1,3 +1,5 @@
+import unicodedata
+
 def are_anagrams(str1: str, str2: str) -> bool:
     """
     Check if two strings are anagrams of each other.
@@ -19,12 +21,22 @@ def are_anagrams(str1: str, str2: str) -> bool:
     if not (isinstance(str1, str) and isinstance(str2, str)):
         raise TypeError("Both arguments must be strings")
     
-    # Remove whitespace and convert to lowercase for consistent comparison
-    str1 = ''.join(char.lower() for char in str1 if char.isalnum())
-    str2 = ''.join(char.lower() for char in str2 if char.isalnum())
+    # Normalize unicode characters and remove accents
+    def normalize(s: str) -> str:
+        # Remove accents and convert to lowercase
+        normalized = ''.join(
+            char.lower() for char in unicodedata.normalize('NFKD', s) 
+            if not unicodedata.combining(char)
+        )
+        # Remove non-alphanumeric characters
+        return ''.join(char for char in normalized if char.isalnum())
+    
+    # Normalize and compare
+    str1_normalized = normalize(str1)
+    str2_normalized = normalize(str2)
     
     # Quick length check
-    if len(str1) != len(str2):
+    if len(str1_normalized) != len(str2_normalized):
         return False
     
     # Create character frequency dictionaries
@@ -32,10 +44,10 @@ def are_anagrams(str1: str, str2: str) -> bool:
     char_count2 = {}
     
     # Count character frequencies
-    for char in str1:
+    for char in str1_normalized:
         char_count1[char] = char_count1.get(char, 0) + 1
     
-    for char in str2:
+    for char in str2_normalized:
         char_count2[char] = char_count2.get(char, 0) + 1
     
     # Compare character frequencies
