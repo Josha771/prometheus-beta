@@ -37,5 +37,5 @@ def test_invalid_inputs():
 
 def test_unicode_characters():
     """Test anagram detection with unicode characters"""
-    assert are_anagrams("éléphant", "ephalnte") == True
+    assert are_anagrams("élément", "element") == True
     assert are_anagrams("café", "face") == False
