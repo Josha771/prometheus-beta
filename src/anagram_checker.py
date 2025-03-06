@@ -20,8 +20,8 @@ def are_anagrams(str1: str, str2: str) -> bool:
         raise TypeError("Both arguments must be strings")
     
     # Remove whitespace and convert to lowercase for consistent comparison
-    str1 = str1.replace(" ", "").lower()
-    str2 = str2.replace(" ", "").lower()
+    str1 = ''.join(char.lower() for char in str1 if char.isalnum())
+    str2 = ''.join(char.lower() for char in str2 if char.isalnum())
     
     # Quick length check
     if len(str1) != len(str2):
