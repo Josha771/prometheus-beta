@@ -57,11 +57,11 @@ def test_log_with_progress():
 def test_progress_bar_edge_cases():
     """Test edge cases for progress bar"""
     # Test with zero total
-    with pytest.raises(ZeroDivisionError):
+    with pytest.raises(ValueError, match="Total must be a positive number greater than zero"):
         ProgressBar(total=0)
     
     # Test with negative total
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError, match="Total must be a positive number greater than zero"):
         ProgressBar(total=-10)
 
 def test_progress_bar_custom_parameters():
