@@ -21,11 +21,11 @@ def find_first_last_occurrence(arr, target):
         while left <= right:
             mid = (left + right) // 2
             
-            if arr[mid] == target:
+            if arr[mid] == target and (first_index == -1 or type(arr[mid]) is type(target)):
                 first_index = mid
                 # Continue searching in the left half
                 right = mid - 1
-            elif arr[mid] < target:
+            elif arr[mid] < target or (arr[mid] == target and type(arr[mid]) is not type(target)):
                 left = mid + 1
             else:
                 right = mid - 1
@@ -40,7 +40,7 @@ def find_first_last_occurrence(arr, target):
         while left <= right:
             mid = (left + right) // 2
             
-            if arr[mid] == target:
+            if arr[mid] == target and (last_index == -1 or type(arr[mid]) is type(target)):
                 last_index = mid
                 # Continue searching in the right half
                 left = mid + 1
@@ -62,12 +62,6 @@ def find_first_last_occurrence(arr, target):
     if first == -1:
         return (-1, -1)
     
-    # For mixed types, adjust the last occurrence to ensure it corresponds precisely to the target's type
-    last = first  # Start with first index
-    for i in range(first+1, len(arr)):
-        if arr[i] == target and type(arr[i]) is type(target):
-            last = i
-        else:
-            break
+    last = binary_search_last(arr, target)
     
     return (first, last)
