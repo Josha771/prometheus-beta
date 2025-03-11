@@ -21,7 +21,13 @@ class ProgressBar:
         
         Args:
             total (int/float): Total number of iterations expected
+        
+        Raises:
+            ValueError: If total is zero or negative
         """
+        if total <= 0:
+            raise ValueError("Total must be a positive number greater than zero")
+        
         self.total = total
         self.prefix = prefix
         self.suffix = suffix
