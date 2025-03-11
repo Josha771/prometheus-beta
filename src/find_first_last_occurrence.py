@@ -62,6 +62,12 @@ def find_first_last_occurrence(arr, target):
     if first == -1:
         return (-1, -1)
     
-    last = binary_search_last(arr, target)
+    # For mixed types, adjust the last occurrence to ensure it corresponds precisely to the target's type
+    last = first  # Start with first index
+    for i in range(first+1, len(arr)):
+        if arr[i] == target and type(arr[i]) is type(target):
+            last = i
+        else:
+            break
     
     return (first, last)
