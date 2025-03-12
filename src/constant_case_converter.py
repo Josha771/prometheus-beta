@@ -39,13 +39,15 @@ def to_constant_case(input_string: str) -> str:
     # Replace hyphens with spaces
     input_string = input_string.replace('-', ' ')
     
-    # Insert spaces before capital letters 
-    # (handles camelCase and PascalCase)
+    # Insert spaces before capital letters and before/after numbers
+    # (handles camelCase, PascalCase, and numbers)
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1 \2', input_string)
-    s2 = re.sub('([a-z0-9])([A-Z])', r'\1 \2', s1)
+    s2 = re.sub('([a-z])([0-9])', r'\1 \2', s1)
+    s3 = re.sub('([0-9])([a-z])', r'\1 \2', s2)
+    s4 = re.sub('([a-z0-9])([A-Z])', r'\1 \2', s3)
     
     # Replace underscores and multiple spaces with single space
-    normalized = re.sub(r'[_\s]+', ' ', s2)
+    normalized = re.sub(r'[_\s]+', ' ', s4)
     
     # Convert to uppercase and replace spaces with underscores
     return normalized.strip().upper().replace(' ', '_')
