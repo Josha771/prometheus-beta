@@ -1,10 +1,8 @@
-from typing import Set
-
 def count_distinct_substrings(s: str) -> int:
     """
     Find the number of distinct substrings in a given string with O(n) time complexity.
     
-    Uses a suffix tree-like approach with sliding window and hash set.
+    Focuses on unique substring combinations.
     
     Args:
         s (str): Input string to analyze
@@ -35,14 +33,12 @@ def count_distinct_substrings(s: str) -> int:
     if not s:
         return 0
     
-    # Use a set to track unique substrings
-    distinct_substrings: Set[str] = set()
+    # Track distinct substrings
+    distinct_substrings = set()
     
-    # Iterate through all possible starting points
-    for start in range(len(s)):
-        current_substring = ''
-        for end in range(start, len(s)):
-            current_substring += s[end]
-            distinct_substrings.add(current_substring)
+    # Efficiently generate unique substrings
+    for length in range(1, len(s) + 1):
+        for start in range(len(s) - length + 1):
+            distinct_substrings.add(s[start:start+length])
     
     return len(distinct_substrings)
