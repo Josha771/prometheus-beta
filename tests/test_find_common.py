@@ -18,7 +18,7 @@ def test_find_common_duplicate_elements():
 
 def test_find_common_different_types():
     """Test finding common elements with mixed types"""
-    assert sorted(find_common([1, 'a', 2], [2, 'a', 3])) == [2, 'a']
+    assert set(find_common([1, 'a', 2], [2, 'a', 3])) == {2, 'a'}
 
 def test_find_common_invalid_input():
     """Test error handling for invalid input types"""
