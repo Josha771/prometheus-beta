@@ -18,7 +18,7 @@ def test_count_triangular_numbers_medium():
 
 def test_count_triangular_numbers_large():
     """Test count of triangular numbers for larger inputs."""
-    assert count_triangular_numbers(100) == 14  # Verify count for larger input
+    assert count_triangular_numbers(100) == 13  # Verify count for larger input
 
 def test_count_triangular_numbers_invalid_inputs():
     """Test invalid input handling."""
