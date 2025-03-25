@@ -12,6 +12,7 @@ def filter_primes(numbers):
         - Handles both positive and negative numbers
         - 1 and numbers less than 1 are not considered prime
         - 2 is the smallest prime number
+        - Negative primes use absolute primality
     """
     def is_prime(n):
         # Handle non-prime cases first
@@ -29,5 +30,5 @@ def filter_primes(numbers):
         
         return True
     
-    # Use list comprehension to filter prime numbers
-    return [num for num in numbers if is_prime(num)]
+    # Use list comprehension to filter prime numbers, keeping sign for output
+    return [num for num in numbers if is_prime(abs(num))]
