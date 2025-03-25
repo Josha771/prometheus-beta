@@ -28,9 +28,11 @@ def count_triangular_numbers(n):
     if n == 0:
         return 0
     
-    # Count triangular numbers using the inverse triangular number formula
-    # The kth triangular number is k * (k + 1) // 2
-    # We want to find the largest k such that k * (k + 1) // 2 <= n
-    k = int((2 * n + 0.25)**0.5 - 0.5)
+    # Use a more explicit method to count triangular numbers
+    count = 0
+    k = 1
+    while (k * (k + 1) // 2) <= n:
+        count += 1
+        k += 1
     
-    return k
+    return count
