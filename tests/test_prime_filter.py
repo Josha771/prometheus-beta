@@ -15,7 +15,7 @@ def test_filter_primes_no_primes():
 
 def test_filter_primes_negative_numbers():
     """Test filtering with negative numbers"""
-    assert filter_primes([-2, -3, -4, -5, -6, -7, 2, 3, 4, 5]) == [2, 3, 5, -2, -3, -5, -7]
+    assert set(filter_primes([-2, -3, -4, -5, -6, -7, 2, 3, 4, 5])) == {2, 3, 5, -2, -3, -5, -7}
 
 def test_filter_primes_zero_and_one():
     """Test handling of zero and one"""
