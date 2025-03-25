@@ -17,4 +17,10 @@ def find_common(list1, list2):
         raise TypeError("Both arguments must be lists")
     
     # Use set intersection for efficient common element finding
-    return list(set(list1) & set(list2))
+    common_elements = list(set(list1) & set(list2))
+    
+    # Try to sort if possible, otherwise return as is
+    try:
+        return sorted(common_elements)
+    except TypeError:
+        return common_elements
