@@ -12,6 +12,9 @@ def count_distinct_substrings(s: str) -> int:
     Returns:
         int: Number of distinct substrings
     
+    Raises:
+        TypeError: If input is not a string
+    
     Time Complexity: O(n)
     Space Complexity: O(n)
     
@@ -23,6 +26,12 @@ def count_distinct_substrings(s: str) -> int:
         >>> count_distinct_substrings('a')
         1
     """
+    if s is None:
+        raise TypeError("Input must be a string")
+    
+    if not isinstance(s, str):
+        raise TypeError("Input must be a string")
+    
     if not s:
         return 0
     
