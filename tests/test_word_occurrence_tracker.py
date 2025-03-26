@@ -9,7 +9,7 @@ def test_basic_occurrence():
 def test_multiple_occurrences():
     """Test finding a word with multiple occurrences"""
     result = find_word_occurrences("the cat and the dog and the bird", "the")
-    assert result == [(0, "the"), (12, "the"), (25, "the")]
+    assert result == [(0, "the"), (12, "the"), (24, "the")]
 
 def test_no_occurrences():
     """Test when target word is not in the string"""
