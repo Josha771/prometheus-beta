@@ -10,6 +10,7 @@ def is_prime(n: int) -> bool:
     Returns:
         bool: True if the number is prime, False otherwise
     """
+    n = abs(n)  # Handle negative numbers
     if n < 2:
         return False
     for i in range(2, int(n**0.5) + 1):
@@ -28,8 +29,12 @@ def find_prime_path(grid: List[List[int]]) -> Optional[List[Tuple[int, int]]]:
         Optional[List[Tuple[int, int]]]: Path of coordinates forming a prime number sequence,
         or None if no such path exists
     """
-    if not grid or not grid[0]:
+    if not grid:
         return None
+    
+    # Handle single cell grid
+    if len(grid) == 1 and len(grid[0]) == 1:
+        return [(0, 0)] if is_prime(grid[0][0]) else None
     
     rows, cols = len(grid), len(grid[0])
     visited = [[False] * cols for _ in range(rows)]
@@ -37,8 +42,8 @@ def find_prime_path(grid: List[List[int]]) -> Optional[List[Tuple[int, int]]]:
     def dfs(x: int, y: int, path: List[Tuple[int, int]], current_num: int) -> Optional[List[Tuple[int, int]]]:
         # Check bounds and visited status
         if (x < 0 or x >= rows or y < 0 or y >= cols or 
-            visited[x][y] or not is_prime(grid[x][y]) or 
-            not is_prime(current_num)):
+            visited[x][y] or not is_prime(abs(grid[x][y])) or 
+            not is_prime(abs(current_num))):
             return None
         
         # Mark current cell as visited and add to path
@@ -54,8 +59,12 @@ def find_prime_path(grid: List[List[int]]) -> Optional[List[Tuple[int, int]]]:
         for dx, dy in directions:
             new_x, new_y = x + dx, y + dy
             
+            # Skip if out of bounds
+            if new_x < 0 or new_x >= rows or new_y < 0 or new_y >= cols:
+                continue
+            
             # Construct next number by appending digits
-            next_num = current_num * 10 + (abs(grid[new_x][new_y]) if 0 <= new_x < rows and 0 <= new_y < cols else 0)
+            next_num = current_num * 10 + abs(grid[new_x][new_y])
             
             # Recursively search from the new position
             result = dfs(new_x, new_y, path.copy(), next_num)
@@ -69,7 +78,7 @@ def find_prime_path(grid: List[List[int]]) -> Optional[List[Tuple[int, int]]]:
         for j in range(cols):
             # Reset visited for each starting point
             visited = [[False] * cols for _ in range(rows)]
-            result = dfs(i, j, [], grid[i][j])
+            result = dfs(i, j, [], abs(grid[i][j]))
             if result:
                 return result
     
