@@ -10,9 +10,13 @@ def is_prime(n: int) -> bool:
     Returns:
         bool: True if the number is prime, False otherwise
     """
-    n = abs(n)  # Handle negative numbers
-    if n < 2:
+    # Negative numbers and 0 or 1 are not prime
+    if n <= 1:
         return False
+    
+    # Take absolute value of input
+    n = abs(n)
+    
     for i in range(2, int(n**0.5) + 1):
         if n % i == 0:
             return False
