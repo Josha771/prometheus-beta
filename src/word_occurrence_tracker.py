@@ -35,14 +35,11 @@ def find_word_occurrences(input_string: str, target_word: str) -> list:
 
     # Iterate through words to find occurrences
     for word in words:
-        # Add word length and space to current position
-        if occurrences:
-            current_position += len(word) + 1  # +1 for space
-        else:
-            current_position += len(word)
-        
         # Check if current word matches target
         if word == target_word:
-            occurrences.append((current_position - len(word), word))
+            occurrences.append((current_position, word))
+        
+        # Add word length and space to current position for next iteration
+        current_position += len(word) + 1  # +1 for space
 
     return occurrences
